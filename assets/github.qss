@@ -1,0 +1,30 @@
+/* Allgemeiner Hintergrund */
+QWidget {
+    background-color: #0D1117;
+    color: #C9D1D9;
+}
+
+/* Textboxen */
+QTextEdit {
+    background-color: #0D1117;
+    color: #C9D1D9;
+    border: 1px solid #30363D;
+    border-radius: 4px;  /* Setzt die Rundung der Ecken */
+}
+
+/* Buttons */
+QPushButton {
+    background-color: #238636;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+QPushButton:hover {
+    background-color: #2EA043;
+}
+
+QPushButton:pressed {
+    background-color: #1C722E;
+}
