@@ -32,7 +32,7 @@ def get_local_subnets():
                         [bin(int(x)).count("1") for x in addr.netmask.split(".")]
                     )
                     subnets.append(f"{network_address}/{cidr}")
-    return subnets
+    return list(dict.fromkeys(subnets))
 
 
 def scan_subnet(target_ip):

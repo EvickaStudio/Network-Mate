@@ -34,7 +34,7 @@ def get_local_subnets():
                     # CIDR-Wert berechnen
                     cidr = sum(bin(int(x)).count("1") for x in addr.netmask.split("."))
                     subnets.append(f"{network_address}/{cidr}")
-    return subnets
+    return list(dict.fromkeys(subnets))
 
 
 def scan_subnet(target_ip):
@@ -53,7 +53,7 @@ def scan_subnet(target_ip):
     packet = ether / arp
 
     # ARP-Anfrage senden
-    result = srp(packet, timeout=3, verbose=0)[0]
+    result = srp(packet, timeout=10, verbose=0)[0]
     return [
         {
             "ip": received.psrc,
