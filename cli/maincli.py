@@ -28,9 +28,7 @@ def get_local_subnets():
                         str(ip & mask) for ip, mask in zip(ip_parts, mask_parts)
                     )
                     # CIDR-Wert berechnen
-                    cidr = sum(
-                        [bin(int(x)).count("1") for x in addr.netmask.split(".")]
-                    )
+                    cidr = sum(bin(int(x)).count("1") for x in addr.netmask.split("."))
                     subnets.append(f"{network_address}/{cidr}")
     return list(dict.fromkeys(subnets))
 
@@ -52,13 +50,10 @@ def scan_subnet(target_ip):
 
     # ARP-Anfrage senden
     result = srp(packet, timeout=10, verbose=0)[0]
-    clients = []
-
-    # Antwortpakete verarbeiten
-    for sent, received in result:
-        clients.append({"ip": received.psrc, "mac": received.hwsrc})
-
-    return clients
+    return [
+        {"ip": received.psrc, "mac": received.hwsrc}
+        for sent, received in result
+    ]
 
 
 def scan_and_print(subnet):
